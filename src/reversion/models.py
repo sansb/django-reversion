@@ -102,6 +102,10 @@ class Revision(models.Model):
         """Returns a unicode representation."""
         return u", ".join(unicode(version) for version in self.version_set.all())
 
+    if settings.REVERSION_REVISION_TABLE:
+        class Meta:
+            db_table = settings.REVERSION_REVISION_TABLE
+
 
 # Version types.
 
@@ -297,3 +301,7 @@ class Version(models.Model):
     def __unicode__(self):
         """Returns a unicode representation."""
         return self.object_repr
+
+    if settings.REVERSION_VERSION_TABLE:
+        class Meta:
+            db_table = settings.REVERSION_VERSION_TABLE
